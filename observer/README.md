@@ -10,25 +10,25 @@ Le pattern "Observer" est souvent utilisé dans les services tranversaux. Ces se
 
 #Symptômes
 1. Une classe (le sujet) est modifié à chaque fois qu'un de ses comportements nécessite d'avertir une autre classe 
-2. Ce qui doit être mis à jour nécessite crée des effets de bord sur les autres objets qui suivent cette même mise à jour. 
+2. Ce qui doit être mis à jour crée des effets de bord sur les autres objets qui suivent cette même mise à jour. 
 
 #Idée générale
 Une relation un à plusieurs où les observeurs s'inscrivent ou se désinscrivent à un sujet.
 
 #Exemple
 Vous faites pousser des fines herbes et vous souhaitez être avertit de l'humidité en temps réel.
-Trois éléments doivent réagir lorsque qu'un changement d'humidité se produit :
+Trois éléments doivent réagir lorsqu'un changement d'humidité se produit :
 1. Votre siteweb
-2. L'avertisseur par e-mail lorsqu'un certain seuil est atteint
-3. La petite pompe qui permet d'arroser automatiquement
+2. Un avertissement par e-mail lorsqu'un certain seuil est atteint
+3. La petite pompe qui permet d'arroser automatiquement les plantes doit se mettre en marche
 
-Il serait tentant de mettre dans le capteur d'humidité une section comme suit par exemple: 
+Il serait tentant de mettre dans le capteur d'humidité une section comme suit: 
 ```
+#Capteur
 if taux < TAUX_MIN :
     #avertir
-    
 ```
-Mais ce serait une erreur. Ce n'est pas le rôle du capteur que d'avertir, son rôle est d'informer en recueillant une information. Constatez aussi qu'il faudrait pour chaque nouvelle condition ajouté une condition supplémentaire d'avertissement.
+Mais ce serait une erreur. Ce n'est pas le rôle du capteur d'avertir, son rôle est de render l'information disponible en la recueillant. Constatez aussi qu'il faudrait pour chaque nouvelle condition ajouter une condition supplémentaire d'avertissement.
 
 #Note
-Le modèle utilisé ici sera celui basé sur le "push". Ce n'est pas toujours le meilleur puisqu'on force les observeurs à gober de l'information. Ceci dit, c'est le plus simple à démontrer. La différence est que lors d'une conception "pull" la fonction `update` du sujet ne comprends aucun paramètre. Celle-ci lance seulement un signal et les observeurs décident ou non d'agir en fonction de celui-ci. La fonction `update` reste donc plus flexible. 
+Le modèle utilisé ici sera celui basé sur le "push". Ce n'est pas toujours le meilleur choix puisqu'on force les observeurs à gober de l'information. Ceci dit, c'est le plus simple à démontrer. La différence est que lors d'une conception "pull" la fonction `update` du sujet ne comprends aucun paramètre. Celle-ci lance seulement un signal et les observeurs décident ou non d'agir en fonction de celui-ci en contactant eux-mêmes le sujet. La fonction `update` reste donc plus flexible. 
