@@ -4,7 +4,7 @@
 class Program():
     """
     Classe abstraite
-    À noter que cette n'est pas obligé d'être abstraite.
+    À noter que cette interface n'est pas obligé d'en être une, ce aurait pu être le programme d'archive.
     La délégation peut très bien ce faire sans celle-ci.
     """
     def __init__(self):
